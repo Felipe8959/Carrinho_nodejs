@@ -1,0 +1,86 @@
+h1{
+    font-size: 32px;
+    text-align: center;
+}
+
+.carrinho{
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+.carrinho p{
+    color: rgb(53, 53, 53);
+}
+
+
+.container{
+    color: white;
+}
+
+.custom-heading {
+    text-align: left;
+}
+
+#textCarrinho {
+    color: rgb(53, 53, 53);
+}
+
+.resumo-compras{
+    text-align: center;
+    margin-top: 20px;
+}
+
+.col {
+    padding: 0.5%;
+}
+
+.col .btn{
+    align-items: center;
+    width: 70px;
+    border-radius: 10px;
+}
+
+#irConsulta{
+    width: 90px;
+}
+
+.custom-btn-add, 
+.custom-btn-add:active, 
+.custom-btn-add:focus {
+    background-color: #72b761;
+    outline: none;
+    border: none;
+    box-shadow: none;
+}
+
+.custom-btn-add:hover {
+    background-color: #91e07e !important;
+}
+
+.custom-btn-clear, 
+.custom-btn-clear:focus,
+.custom-btn-clear:active{
+    background-color: #c32113;
+    outline: none;
+    border: none;
+    box-shadow: none;
+}
+
+.custom-btn-clear:hover{
+    background-color: #dd8484 !important;
+}
+
+.carrinho .btn {
+    border-radius: 10px;
+    color: white;
+    border: none;
+    border-radius: 10px;
+}
+
+.fixed-header th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    border: 20px;
+    background-color: #fff; /* Fundo branco para esconder o cabeçalho original */
+}

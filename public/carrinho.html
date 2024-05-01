@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrinho de compras</title>
+    <link rel="icon" type="image/png" href="img/logo1.png">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app.js" type="module"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore.js" type="module"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="carrinho.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <img src="img/logo_name_branco.png" alt="Logo" width="auto" height="30">   
+            </a>
+            <span id="navbarUsername" style="display: none;"></span>
+            <button id="logoutButton" class="btn btn-outline-light" style="display: none;">Logout</button> 
+            <a href="/login-page" id="loginButton" class="btn btn-outline-light">Login</a>
+        </div>
+    </nav>
+    <!-- Conteúdo -->
+    <div class="carrinho">
+        <div class="container mt-5">
+            <h1 class="text-left mb-4" id="textCarrinho"><i class="fas fa-shopping-cart"></i> Carrinho</h1>
+            <div class="row mb-3">
+                <div class="col">
+                    <input type="text" id="itemName" class="form-control mb-2" placeholder="Produto">
+                    <input type="text" id="limit" class="form-control mb-2" placeholder="Limite R$ (opcional)">
+                </div>
+                <div class="col">
+                    <input type="text" id="itemPrice" class="form-control mb-2" placeholder="Preço (R$)">
+                    <input type="number" id="itemQuantity" class="form-control mb-2" placeholder="Qtd" value="1">
+                </div>
+            </div>
+            <div class="text-center">
+                <div class="col">
+                    <button onclick="addItem()" class="btn btn-primary custom-btn-add">Add</button>
+                    <button onclick="clearItems()" class="btn btn-danger custom-btn-clear">Limpar</button>
+                    <button id="salvarBtn" class="btn btn-primary custom-btn">Salvar</button>
+                    <button id="irConsulta" class="btn btn-primary custom-btn">Consultar</button>
+                </div>
+            </div>
+            <p class="resumo-compras">Total: <span id="total">R$ 0,00</span> | Itens no carrinho: <span id="itemCount">0</span></p>
+            <div class="table-container" style="height: 300px; overflow-y: auto;">
+                <table class="table fixed-header">
+                    <thead>
+                        <tr>
+                            <th>Produto</th>
+                            <th>Preço     </th>
+                            <th>Qtd.</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody id="itemList"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="login.js"></script>
+    <script src="script.js"></script>
+    <script>
+        document.getElementById('irConsulta').addEventListener('click', function() {
+            console.log('Botão "Consulta" clicado');
+            window.location.href = '/consulta';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Usuário</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Adicione o link para o seu arquivo de estilos personalizados, se houver -->
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <img src="img/logo_name_branco.png" alt="Logo" width="auto" height="30">
+            </a>
+            <span id="navbarUsername" style="display: none;"></span>
+            <button id="logoutButton" class="btn btn-outline-light" style="display: none;">Logout</button>
+        </div>
+    </nav>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title text-center mb-4">Registro de Usuário</h2>
+                        <form id="registro-form">
+                            <div class="form-group">
+                                <label for="registro-username">Nome de Usuário</label>
+                                <input type="text" class="form-control" id="registro-username" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="registro-password">Senha</label>
+                                <input type="password" class="form-control" id="registro-password" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="registro-email">E-mail</label>
+                                <input type="text" class="form-control" id="registro-email" required>
+                            </div>
+                            <button onclick="registrar()" type="submit" class="btn btn-primary btn-block">Registrar</button>
+                        </form>
+                        <p class="text-center mt-3">Já tem uma conta? <a href="/login-page">Faça login</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="login.js"></script>
+</body>
+</html>
