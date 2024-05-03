@@ -16,7 +16,7 @@ app.use(express.json()); // Middleware para analisar JSON
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// Configurar a sessão
+// configura a sessão
 app.use(session({
   secret: 'secretkey', // chave para assinar a sessão
   resave: false,
@@ -37,7 +37,7 @@ client.connect() // conecta ao banco de dados
   .catch(err => console.error('Erro ao conectar ao banco de dados', err));
 
   
-// Middleware de Autenticação
+// Middleware de autenticação
 function autenticacaoMiddleware(req, res, next) {
   // verifica se o usuário está autenticado
   if (req.session && req.session.usuario) {
