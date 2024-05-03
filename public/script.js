@@ -3,8 +3,8 @@ let total = 0;
 
 function addItem() {
     const itemName = document.getElementById('itemName').value;
-    let itemPrice = document.getElementById('itemPrice').value.replace(/\D/g, ''); // Remover tudo exceto números
-    itemPrice = parseFloat(itemPrice) / 100; // Converter para número e dividir por 100 para obter o valor em reais
+    let itemPrice = document.getElementById('itemPrice').value.replace(/\D/g, ''); // remove tudo exceto números
+    itemPrice = parseFloat(itemPrice) / 100; // converte para número e divide por 100 para obter o valor em R$
     const itemQuantity = parseInt(document.getElementById('itemQuantity').value);
 
     if (!itemName || isNaN(itemPrice) || isNaN(itemQuantity)) {
@@ -51,7 +51,7 @@ function renderItems() {
     });
 
     let limit = document.getElementById('limit').value;
-    // Remove o R$ e outros caracteres não numéricos
+    // remove o R$ e outros caracteres não numéricos
     limit = parseFloat(limit.replace(/[^\d.,]/g, '').replace(',', '.'));
     const totalElement = document.getElementById('total');
     const percentage = (total / limit) * 100;
@@ -75,17 +75,17 @@ function clearItems() {
 }
 
 function formatInput(inputId) {
-    // Formatação automática do preço enquanto o usuário digita
+    // formatação automática do preço enquanto o usuário digita
     document.getElementById(inputId).addEventListener('input', function(e) {
-        let value = e.target.value.replace(/\D/g, ''); // Remove tudo exceto números
-        value = (value / 100).toFixed(2); // Converter centavos em reais e limitar a 2 casas decimais
-        e.target.value = 'R$ ' + value.replace('.', ','); // Adicionar o símbolo de moeda e substituir o ponto decimal por vírgula
+        let value = e.target.value.replace(/\D/g, ''); // remove tudo exceto números
+        value = (value / 100).toFixed(2); // converte centavos em reais e limita a 2 casas decimais
+        e.target.value = 'R$ ' + value.replace('.', ','); // adiciona o símbolo de moeda e substitui o ponto decimal por vírgula
     });
 
-    // Validar para garantir que apenas números e um único ponto decimal sejam inseridos
+    // valida para garantir que apenas números e um único ponto decimal sejam inseridos
     document.getElementById(inputId).addEventListener('keypress', function(e) {
         if (e.key === '.' && e.target.value.includes('.')) {
-            e.preventDefault(); // Impedir a inserção de mais de um ponto decimal
+            e.preventDefault(); // impede a inserção de mais de um ponto decimal
         }
     });
 }
@@ -115,7 +115,7 @@ document.getElementById('salvarBtn').addEventListener('click', function() {
         itens.push(item);
     });
 
-    // Enviar os dados para o servidor
+    // envia os dados para o servidor
     fetch(`http://${ipAddress}:3000/salvarItens`, {
         method: 'POST',
         headers: {

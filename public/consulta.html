@@ -30,21 +30,19 @@
                 <button id="consultarComprasBtn" class="btn btn-primary">Pesquisar</button>
             </div>
         </div>
-        <!-- Local onde a tabela será inserida -->
+        <!-- onde a tabela será inserida -->
         <div id="infoContainer"></div>
         <div id="comprasContainer"></div>
     </div>
-
-    <!-- Bootstrap JS (opcional, apenas se você precisar de funcionalidades como dropdowns, modals, etc.) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="login.js"></script>
     <script src="script.js"></script>
     <script>
         document.getElementById('consultarComprasBtn').addEventListener('click', function() {
-            // Obter a data informada pelo usuário
+            // data informada pelo usuário
             const data = document.getElementById('dataInput').value;
 
-            // Fazer uma requisição para consultar as compras do usuário para a data informada
+            // requisição para consultar as compras do usuário para a data informada
             fetch(`/consultar-compras?data=${data}`, {
                 method: 'GET',
                 headers: {
@@ -58,12 +56,12 @@
                 return response.json();
             })
             .then(data => {
-                // Processar os dados e exibir na página
+                // processar os dados e exibir na página
                 const infoContainer = document.getElementById('infoContainer');
                 const comprasContainer = document.getElementById('comprasContainer');
-
-                infoContainer.innerHTML = ''; // Limpar conteúdo anterior
-                comprasContainer.innerHTML = ''; // Limpar conteúdo anterior
+                // limpar conteúdo anterior
+                infoContainer.innerHTML = ''; 
+                comprasContainer.innerHTML = '';
 
                 if (data.length === 0) {
                     comprasContainer.innerHTML = '<div class="alert alert-warning">Nenhuma compra encontrada para a data informada.</div>';
@@ -84,7 +82,7 @@
 
                     data.forEach(compra => {
                         const tr = document.createElement('tr');
-                        // Formatar a data para dd/mm/aaaa
+                        // formatar a data para dd/mm/aaaa
                         const dataFormatada = new Date(compra.data).toLocaleDateString('pt-BR');
                         tr.innerHTML = `<td>${compra.produto}</td><td>R$ ${compra.preco}</td><td>${compra.quantidade}</td><td>${dataFormatada}</td><td>${compra.usuario}</td>`;
                         tbody.appendChild(tr);

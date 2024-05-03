@@ -48,7 +48,7 @@ body::before {
 @media (max-width: 768px) {
     body {
         position: relative;
-        overflow: hidden; /* Evita que o conteúdo ultrapasse o corpo da página */
+        overflow: hidden;
         background-image: url('img/fundo.jpg');
         background-size: cover;
         background-repeat: no-repeat;
