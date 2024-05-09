@@ -7,7 +7,8 @@ function entrar() {
     console.log(ipAddress);
 
     // envia os dados de login para o servidor
-    fetch(`http://${ipAddress}:3000/login`, {
+    // fetch(`http://${ipAddress}:3000/login`, {
+    fetch(`/login`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -37,7 +38,9 @@ function registrar() {
     const ipAddress = window.location.hostname;
 
     // envia os dados de registro para o servidor
-    fetch(`http://${ipAddress}:3000/registro`, {
+    // viaduct.proxy.rlwy.net:53960
+    // fetch(`http://${ipAddress}:3000/registro`, {
+    fetch(`/registro`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
