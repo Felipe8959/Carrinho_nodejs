@@ -23,13 +23,22 @@ app.use(session({
   saveUninitialized: false
 }));
 
-// Configurações de conexão com o banco de dados
+// Configurações de conexão com o banco de dados local
+// const client = new Client({
+//   user: 'postgres',
+//   host: 'localhost',
+//   database: 'Carrinho',
+//   password: 'admin',
+//   port: 5432, // porta padrão do PostgreSQL
+// });
+
+// Configurações de conexão com o banco de dados Railway.app
 const client = new Client({
   user: 'postgres',
-  host: 'localhost',
-  database: 'Carrinho',
-  password: 'admin',
-  port: 5432, // porta padrão do PostgreSQL
+  host: 'viaduct.proxy.rlwy.net',
+  database: 'railway',
+  password: 'znzhQiPlvOyHqTDAjzdzLjAKBbdHvGZB',
+  port: 53960, // porta padrão do PostgreSQL
 });
 
 client.connect() // conecta ao banco de dados
@@ -59,11 +68,12 @@ function autenticacaoMiddleware(req, res, next) {
 app.get('/consultar-compras', async (req, res) => {
 
   const data = req.query.data; // data da solicitação
+  const usuario = req.session.usuario; // usuario logado
 
   try {
       // consulta a tabela para obter todas as informações da mesma data
-      const query = 'SELECT * FROM itens_carrinho WHERE data = $1';
-      const { rows } = await client.query(query, [data]);
+      const query = 'SELECT * FROM itens_carrinho WHERE data = $1 AND usuario = $2';
+      const { rows } = await client.query(query, [data, usuario]);
 
       // envia a lista de compras como resposta
       res.json(rows);

@@ -87,9 +87,10 @@ document.addEventListener('DOMContentLoaded', function() {
 // adiciona evento de clique ao botão de logout
 document.getElementById('logoutButton').addEventListener('click', function() {
     // remove o usuário da sessão
+    window.location.href = '/';
     sessionStorage.removeItem('usuario');
     // atualiza a navbar
     atualizarNavbar();
     // redireciona para a página de login
-    window.location.href = '/login-page';
+    // window.location.href = '/';
 });
