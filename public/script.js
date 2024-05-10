@@ -116,7 +116,8 @@ document.getElementById('salvarBtn').addEventListener('click', function() {
     });
 
     // envia os dados para o servidor
-    fetch(`http://${ipAddress}:3000/salvarItens`, {
+    // fetch(`http://${ipAddress}:3000/salvarItens`, {
+    fetch(`/salvarItens`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
