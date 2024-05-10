@@ -44,8 +44,7 @@ const client = new Client({
 client.connect() // conecta ao banco de dados
   .then(() => console.log('Conexão com o banco de dados estabelecida com sucesso'))
   .catch(err => console.error('Erro ao conectar ao banco de dados', err));
-
-  
+ 
 // Middleware de autenticação
 function autenticacaoMiddleware(req, res, next) {
   // verifica se o usuário está autenticado
@@ -61,6 +60,11 @@ function autenticacaoMiddleware(req, res, next) {
       }
   }
 }
+
+// deleta todos os dados da tabela de itens
+// client.query(
+//   'DELETE FROM itens_carrinho',
+// )
 
 
 //---------------- Rotas de funcionalidades ----------------//
@@ -137,7 +141,7 @@ app.post('/registro', async (req, res) => {
 // salvar os itens no banco de dados
 app.post('/salvarItens', (req, res) => {
   const { itens, limite } = req.body;
-  const data = new Date().toISOString().split('T')[0]; // data de hoje
+  const data = new Date().toISOString().split('T')[0];
   const usuario = req.session.usuario;
 
   // inserir cada item na tabela do banco de dados
@@ -146,6 +150,7 @@ app.post('/salvarItens', (req, res) => {
       text: 'INSERT INTO itens_carrinho (produto, preco, limite, quantidade, data, usuario) VALUES ($1, $2, $3, $4, $5, $6)',
       values: [item.produto, item.preco, limite, item.quantidade, data, usuario]
     };
+    console.log(data + ' TESTE');
 
     client.query(query, (err, result) => {
       if (err) {

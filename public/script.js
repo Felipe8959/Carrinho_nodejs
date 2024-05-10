@@ -103,7 +103,7 @@ document.getElementById('salvarBtn').addEventListener('click', function() {
     const rows = document.querySelectorAll('#itemList tr');
     const limite = parseFloat(document.getElementById('limit').value.trim().replace('R$', '').replace(',', '.'));
     const itens = [];
-    const ipAddress = window.location.hostname;
+    //const ipAddress = window.location.hostname;
 
     rows.forEach(row => {
         const columns = row.querySelectorAll('td');
