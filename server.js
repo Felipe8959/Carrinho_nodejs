@@ -150,7 +150,6 @@ app.post('/salvarItens', (req, res) => {
       text: 'INSERT INTO itens_carrinho (produto, preco, limite, quantidade, data, usuario) VALUES ($1, $2, $3, $4, $5, $6)',
       values: [item.produto, item.preco, limite, item.quantidade, data, usuario]
     };
-    console.log(data + ' TESTE');
 
     client.query(query, (err, result) => {
       if (err) {

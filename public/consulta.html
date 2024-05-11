@@ -31,6 +31,11 @@
             <div class="col-auto">
                 <button id="consultarComprasBtn" class="btn btn-primary">Pesquisar</button>
             </div>
+            <div id="carrinhoConsulta" class="row mb-3">
+                <div class="col">
+                    <a href="/carrinho">Ir para carrinho</a>
+                </div>
+            </div>
         </div>
         <!-- onde a tabela será inserida -->
         <div id="infoContainer"></div>
@@ -88,13 +93,13 @@
                         // Obtenha a data do input
                         const inputData = document.getElementById('dataInput').value;
 
-                        // Converta a data para o formato esperado pelo servidor
                         // const dataObj = new Date(compra.data);
                         // const dia = String(dataObj.getDate()).padStart(2, '0');
                         // const mes = String(dataObj.getMonth() + 1).padStart(2, '0'); // Mês começa do zero
                         // const ano = dataObj.getFullYear();
                         // const dataFormatada = `${ano}-${mes}-${dia}`;
                         const dataFormatada = new Date(compra.data).toLocaleDateString('pt-BR');
+                        // const dataFormatada = new date(compra.data).toISOString().split('T')[0];
                         //const dataFormatada = new Date(compra.data).toLocaleString('pt-BR');
                         tr.innerHTML = `<td>${compra.produto}</td><td>R$ ${compra.preco}</td><td>${compra.quantidade}</td><td>${dataFormatada}</td><td>${compra.usuario}</td>`;
                         tbody.appendChild(tr);
