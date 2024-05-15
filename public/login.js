@@ -63,7 +63,7 @@ function registrar() {
         });
 }
 
-// adiciona evento de clique ao botão de logout
+// evento de clique ao botão de logout
 document.getElementById('logoutButton').addEventListener('click', function() {
     // remove o usuário da sessão
     window.location.href = '/';
