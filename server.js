@@ -37,8 +37,8 @@ const client = new Client({
   user: 'postgres',
   host: 'viaduct.proxy.rlwy.net',
   database: 'railway',
-  password: 'znzhQiPlvOyHqTDAjzdzLjAKBbdHvGZB',
-  port: 53960, // porta padrão do PostgreSQL
+  password: 'FlGiIsgFiyUjMUQIWyIDDWXhXwrVISpS',
+  port: 35747, // porta padrão do PostgreSQL
 });
 
 client.connect() // conecta ao banco de dados
