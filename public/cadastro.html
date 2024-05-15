@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de Usuário</title>
+    <link rel="icon" type="image/png" href="img/logo1.png">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
@@ -13,8 +14,6 @@
             <a class="navbar-brand" href="/">
                 <img src="img/logo_name_branco.png" alt="Logo" width="auto" height="30">
             </a>
-            <span id="navbarUsername" style="display: none;"></span>
-            <button id="logoutButton" class="btn btn-outline-light" style="display: none;">Logout</button>
         </div>
     </nav>
     <div class="container mt-5">
@@ -36,7 +35,7 @@
                                 <label for="registro-email">E-mail</label>
                                 <input type="text" class="form-control" id="registro-email" required>
                             </div>
-                            <button onclick="registrar()" type="submit" class="btn btn-primary btn-block">Registrar</button>
+                            <button type="button" onclick="registrar()" class="btn btn-primary btn-block">Registrar</button>
                         </form>
                         <p class="text-center mt-3">Já tem uma conta? <a href="/login-page">Faça login</a></p>
                     </div>
@@ -44,6 +43,7 @@
             </div>
         </div>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="login.js"></script>
 </body>
 </html>

@@ -3,13 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>App de Carrinho de Compras</title>
+    <title>Gerenciamento de Usuários</title>
     <link rel="icon" type="image/png" href="img/logo1.png">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Comfortaa:wght@500&family=Lato:wght@300&family=Outfit:wght@100..900&family=Roboto&family=VT323&family=Work+Sans:wght@200;300;400;500;700&display=swap" rel="stylesheet">    <!-- Estilos personalizados -->
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="admin.css">
 </head>
 <body>
     <!-- Navbar -->
@@ -20,51 +18,63 @@
             </a>
             <div>
                 <span id="navbarUsername" style="display: none;"></span>
-                <button id="logoutButton" onclick="logout()" class="btn btn-outline-light" style="display: none;">Logout</button> 
+                <button id="logoutButton" class="btn btn-outline-light" style="display: none;">Logout</button> 
                 <a href="/login-page" id="loginButton" class="btn btn-outline-light">Login</a>
                 <a href="/cadastro" id="registroButton" class="btn btn-outline-light">Registre-se</a>
             </div>
         </div>
     </nav>
-    <!-- Conteúdo da página -->
-    <div class="conteudo">
-        <div class="container mt-4">       
-            <div class="row">
-                <div class="col-md-6 offset-md-3">
-                    <h1>Bem vindo</h1>
-                    <p>Controle suas compras com o MercadoFácil</p>
-                    <div class="d-flex justify-content-center">
-                        <button id="irCarrinho" class="btn btn-outline-light" style="display: none;">Carrinho</button>
+    <div class="container mt-4">
+        <!-- Tabela para listar usuários -->
+        <div class="card mt-4">
+            <div class="card-header"><strong>Lista de Usuários</strong></div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Usuário</th>
+                            <th>Permissão</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="userList"> <!-- usuários do banco de dados -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- adicionar usuário -->
+        <div class="card mt-4">
+            <div class="card-header"><strong>Inserir / Editar</strong></div>
+            <div class="card-body">
+                <form id="addUserForm">
+                    <div class="form-group">
+                        <label for="username">Nome de Usuário</label>
+                        <input type="text" itemid="username" class="form-control" id="username" required>
                     </div>
-                    <div class="d-flex justify-content-center">
-                        <button id="irConsulta" class="btn btn-outline-light" style="display: none;">Consultar compras</button>
+                    <div class="form-group">
+                        <label for="password">Senha</label>
+                        <input type="password" id="password" class="form-control" id="password" required>
                     </div>
-                    <div class="d-flex justify-content-center">
-                        <button id="irAdmin" class="btn btn-outline-light" style="display: none;">Gerenciar usuários</button>
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input type="text" itemid="email" class="form-control" id="email" required>
                     </div>
-                </div>
+                    <div class="form-group">
+                        <label for="permission">Permissão</label>
+                        <select class="form-control" id="permission" required>
+                            <option value="user">user</option>
+                            <option value="admin">admin</option>
+                        </select>
+                    </div>
+                    <button type="submit" id="addUserButton" class="btn btn-primary">Adicionar</button>
+                </form>
             </div>
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="admin.js"></script>
     <script src="login.js"></script>
-    <script src="script.js"></script>
     <script>
-        document.getElementById('irCarrinho').addEventListener('click', function() {
-            console.log('Botão "Explorar" clicado');
-            window.location.href = '/carrinho';
-        });
-        document.getElementById('irConsulta').addEventListener('click', function() {
-            console.log('Botão "Consulta" clicado');
-            window.location.href = '/consulta';
-        });
-        document.getElementById('irAdmin').addEventListener('click', function() {
-            console.log('Botão "Consulta" clicado');
-            window.location.href = '/admin-page';
-        });
-
         // verifica se o usuário está autenticado e atualiza a navbar
         function atualizarNavbar() {
             const usuario = sessionStorage.getItem('usuario');

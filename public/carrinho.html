@@ -19,15 +19,31 @@
             <a class="navbar-brand" href="/">
                 <img src="img/logo_name_branco.png" alt="Logo" width="auto" height="30">   
             </a>
-            <span id="navbarUsername" style="display: none;"></span>
-            <button id="logoutButton" class="btn btn-outline-light" style="display: none;">Logout</button> 
-            <a href="/login-page" id="loginButton" class="btn btn-outline-light">Login</a>
+            <div>
+                <span id="navbarUsername" style="display: none;"></span>
+                <button id="logoutButton" class="btn btn-outline-light" style="display: none;">Logout</button> 
+                <a href="/login-page" id="loginButton" class="btn btn-outline-light">Login</a>
+                <a href="/cadastro" id="registroButton" class="btn btn-outline-light">Registre-se</a>
+            </div>
         </div>
     </nav>
     <!-- Conteúdo -->
     <div class="carrinho">
         <div class="container mt-5">
             <h1 class="text-left mb-4" id="textCarrinho"><i class="fas fa-shopping-cart"></i> Carrinho</h1>
+            <div class="table-container" style="height: 300px; overflow-y: auto;">
+                <table id="tableList" class="table fixed-header">
+                    <thead>
+                        <tr>
+                            <th>Produto</th>
+                            <th>Preço     </th>
+                            <th>Qtd.</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody id="itemList"></tbody>
+                </table>
+            </div>
             <div class="row mb-3">
                 <div class="col">
                     <input type="text" id="itemName" class="form-control mb-2" placeholder="Produto">
@@ -47,19 +63,6 @@
                 </div>
             </div>
             <p class="resumo-compras">Total: <span id="total">R$ 0,00</span> | Itens no carrinho: <span id="itemCount">0</span></p>
-            <div class="table-container" style="height: 300px; overflow-y: auto;">
-                <table class="table fixed-header">
-                    <thead>
-                        <tr>
-                            <th>Produto</th>
-                            <th>Preço     </th>
-                            <th>Qtd.</th>
-                            <th>Ação</th>
-                        </tr>
-                    </thead>
-                    <tbody id="itemList"></tbody>
-                </table>
-            </div>
         </div>
     </div>
     <script src="login.js"></script>
@@ -68,6 +71,30 @@
         document.getElementById('irConsulta').addEventListener('click', function() {
             console.log('Botão "Consulta" clicado');
             window.location.href = '/consulta';
+        });
+        // verifica se o usuário está autenticado e atualiza a navbar
+        function atualizarNavbar() {
+            const usuario = sessionStorage.getItem('usuario');
+            const permissao = sessionStorage.getItem('permissao');
+
+            console.log('usuário recuperado da sessão:', usuario);
+            console.log('permissao:', permissao);
+            if (usuario) {
+                document.getElementById('navbarUsername').textContent = usuario;
+                document.getElementById('navbarUsername').style.display = 'inline';
+                document.getElementById('logoutButton').style.display = 'inline';
+                document.getElementById('loginButton').style.display = 'none';
+                document.getElementById('registroButton').style.display = 'none';
+            } else {
+                document.getElementById('navbarUsername').style.display = 'none';
+                document.getElementById('logoutButton').style.display = 'none';
+                document.getElementById('loginButton').style.display = 'inline';
+                document.getElementById('registroButton').style.display = 'inline';
+            }
+        }
+        // chamar a função para atualizar a navbar quando o HTML e o CSS forem completamente carregados
+        document.addEventListener('DOMContentLoaded', function() {
+            atualizarNavbar();
         });
     </script>
 </body>

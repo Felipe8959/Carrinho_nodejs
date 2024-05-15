@@ -98,7 +98,7 @@ document.getElementById('limit').addEventListener('input', function() {
 });
 
 
-// Salvar informações no banco de dados
+// salvar informações no banco de dados
 document.getElementById('salvarBtn').addEventListener('click', function() {
     const rows = document.querySelectorAll('#itemList tr');
     const limite = parseFloat(document.getElementById('limit').value.trim().replace('R$', '').replace(',', '.'));
@@ -128,7 +128,10 @@ document.getElementById('salvarBtn').addEventListener('click', function() {
         if (!response.ok) {
             throw new Error('Erro ao salvar itens');
         }
-        alert('Itens salvos com sucesso');
+        const totalItens = itens.reduce((total, item) => total + item.quantidade, 0);
+        var totalPreco = itens.reduce((total, item) => total + (item.preco * item.quantidade), 0);
+        const totalPrecoFormatado = totalPreco.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+        alert(`Foram salvos ${totalItens} itens, totalizando R$ ${totalPrecoFormatado}.`);
         clearItems();
     })
     .catch(error => console.log('Erro ao salvar itens:', error));

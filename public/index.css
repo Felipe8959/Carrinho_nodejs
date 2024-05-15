@@ -4,7 +4,7 @@ html, body {
     font-family: "Outfit", sans-serif;
 }
 
-.container{
+.container {
     color: white;
 }
 
@@ -12,28 +12,37 @@ html, body {
     color: rgb(255, 255, 255);
 }
 
-.conteudo h1{
+.conteudo h1 {
     font-size: 110px;
     text-align: center;
 }
 
-.conteudo p{
+.conteudo p {
     font-size: 22px;
     text-align: center;
 }
 
-#irCarrinho, #irConsulta{
+#irCarrinho, #irConsulta, #irAdmin {
     margin-top: 5%;
+}
+
+#navbarUsername {
+    margin-right: 10px;
+}
+
+.navbar-custom {
+    justify-content: flex-end;
+}
+
+.btn-margin {
+    margin-left: 5px;
 }
 
 body {
     position: relative;
     overflow: hidden;
-    background-image: url('img/fundo.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
 }
+
 body::before {
     content: "";
     position: absolute;
@@ -41,27 +50,48 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-image: url('img/fundo.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    filter: blur(6px); /* Adicionando o filtro de desfoque apenas na imagem de fundo */
     z-index: -1;
 }
 
+body::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Ajuste o último valor (0.5) para alterar a intensidade da máscara */
+    z-index: -1;
+}
+
+.overlay {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
 @media (max-width: 768px) {
-    body {
-        position: relative;
-        overflow: hidden;
-        background-image: url('img/fundo.jpg');
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center;
-    }
     body::before {
         content: "";
         position: absolute;
         top: 0;
         left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.4);
+        width: 110%;
+        height: 110%;
+        background-image: url('img/fundo.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        filter: blur(6px); /* Adicionando o filtro de desfoque apenas na imagem de fundo */
         z-index: -1;
     }
 
@@ -70,12 +100,12 @@ body::before {
         background-color: rgba(255, 255, 255, 0.0);
     }
 
-    .conteudo h1{
+    .conteudo h1 {
         font-size: 70px;
         margin-top: 25%;
     }
 
-    .conteudo a{
+    .conteudo a {
         font-size: 20px;
         color: rgb(0, 255, 13);
     }

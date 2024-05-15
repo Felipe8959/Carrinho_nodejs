@@ -16,9 +16,12 @@
             <a class="navbar-brand" href="/">
                 <img src="img/logo_name_branco.png" alt="Logo" width="auto" height="30">   
             </a>
-            <span id="navbarUsername" style="display: none;"></span>
-            <button id="logoutButton" class="btn btn-outline-light" style="display: none;">Logout</button> 
-            <a href="/login-page" id="loginButton" class="btn btn-outline-light">Login</a>
+            <div>
+                <span id="navbarUsername" style="display: none;"></span>
+                <button id="logoutButton" class="btn btn-outline-light" style="display: none;">Logout</button> 
+                <a href="/login-page" id="loginButton" class="btn btn-outline-light">Login</a>
+                <a href="/cadastro" id="registroButton" class="btn btn-outline-light">Registre-se</a>
+            </div>
         </div>
     </nav>
     <div class="container">
@@ -76,7 +79,7 @@
                     const totalItens = data.reduce((acc, cur) => acc + cur.quantidade, 0);
                     const totalValor = data.reduce((acc, cur) => acc + cur.preco * cur.quantidade, 0);
 
-                    infoContainer.innerHTML = `<p><strong>Total de Itens:</strong> ${totalItens}</p><p><strong>Valor Total:</strong> R$ ${totalValor.toFixed(2)}</p>`;
+                    infoContainer.innerHTML = `<p><strong>Total de Itens:</strong> ${totalItens}</p><p><strong>Valor Total:</strong> R$ ${totalValor.toFixed(2).replace('.',',')}</p>`;
 
                     const table = document.createElement('table');
                     table.className = 'table table-striped';
@@ -89,19 +92,9 @@
 
                     data.forEach(compra => {
                         const tr = document.createElement('tr');
-                        // formatar a data para dd/mm/aaaa
-                        // Obtenha a data do input
                         const inputData = document.getElementById('dataInput').value;
-
-                        // const dataObj = new Date(compra.data);
-                        // const dia = String(dataObj.getDate()).padStart(2, '0');
-                        // const mes = String(dataObj.getMonth() + 1).padStart(2, '0'); // Mês começa do zero
-                        // const ano = dataObj.getFullYear();
-                        // const dataFormatada = `${ano}-${mes}-${dia}`;
-                        const dataFormatada = new Date(compra.data).toLocaleDateString('pt-BR');
-                        // const dataFormatada = new date(compra.data).toISOString().split('T')[0];
-                        //const dataFormatada = new Date(compra.data).toLocaleString('pt-BR');
-                        tr.innerHTML = `<td>${compra.produto}</td><td>R$ ${compra.preco}</td><td>${compra.quantidade}</td><td>${dataFormatada}</td><td>${compra.usuario}</td>`;
+                        const dataFormatada = new Date(compra.data).toISOString().split('T')[0];
+                        tr.innerHTML = `<td>${compra.produto}</td><td>R$ ${compra.preco.replace('.',',')}</td><td>${compra.quantidade}</td><td>${formatarData(dataFormatada)}</td><td>${compra.usuario}</td>`;
                         tbody.appendChild(tr);
                     });
 
@@ -114,6 +107,37 @@
                 const comprasContainer = document.getElementById('comprasContainer');
                 comprasContainer.innerHTML = `<div class="alert alert-danger">Erro ao consultar compras. Por favor, tente novamente mais tarde. ${error}</div>`;
             });
+        });
+
+        function formatarData(data) {
+            const partesData = data.split('-');
+            return `${partesData[2]}/${partesData[1]}/${partesData[0]}`;
+        }
+
+
+        // verifica se o usuário está autenticado e atualiza a navbar
+        function atualizarNavbar() {
+            const usuario = sessionStorage.getItem('usuario');
+            const permissao = sessionStorage.getItem('permissao');
+
+            console.log('usuário recuperado da sessão:', usuario);
+            console.log('permissao:', permissao);
+            if (usuario) {
+                document.getElementById('navbarUsername').textContent = usuario;
+                document.getElementById('navbarUsername').style.display = 'inline';
+                document.getElementById('logoutButton').style.display = 'inline';
+                document.getElementById('loginButton').style.display = 'none';
+                document.getElementById('registroButton').style.display = 'none';
+            } else {
+                document.getElementById('navbarUsername').style.display = 'none';
+                document.getElementById('logoutButton').style.display = 'none';
+                document.getElementById('loginButton').style.display = 'inline';
+                document.getElementById('registroButton').style.display = 'inline';
+            }
+        }
+        // chamar a função para atualizar a navbar quando o HTML e o CSS forem completamente carregados
+        document.addEventListener('DOMContentLoaded', function() {
+            atualizarNavbar();
         });
     </script>
 </body>

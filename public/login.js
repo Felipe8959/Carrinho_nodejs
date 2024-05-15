@@ -19,81 +19,58 @@ function entrar() {
         if (!response.ok) {
             throw new Error('Credenciais inválidas');
         }
-        // armazena o nome de usuário na sessão após um login bem-sucedido
-        sessionStorage.setItem('usuario', username);
-        // redireciona o usuário para outra página após o login bem-sucedido
-        window.location.href = '/carrinho';
+        // armazena o nome de usuário e permissão na sessão após um login bem-sucedido
+        response.json().then(data => {
+            const permissao = data.permissao;
+            sessionStorage.setItem('usuario', username);
+            sessionStorage.setItem('permissao', permissao);
+            // redireciona o usuário para outra página após o login bem-sucedido
+            window.location.href = '/';
+        });
     })
     .catch(error => {
-        alert('Usuário ou senha inválidos' + error.message);
-        console.error('Erro ao fazer login:', error);
+        alert('Usuário ou senha inválidos ' + error.message);
+        console.error('Erro ao fazer login: ', error);
     });
 }
 
 
 function registrar() {
-    const username = document.getElementById('registro-username').value;
-    const password = document.getElementById('registro-password').value;
-    const email = document.getElementById('registro-email').value;
-    const ipAddress = window.location.hostname;
+    const username = $('#registro-username').val();
+    const password = $('#registro-password').val();
+    const email = $('#registro-email').val();
+    const permissao = 'user';
 
-    // envia os dados de registro para o servidor
-    // viaduct.proxy.rlwy.net:53960
-    // fetch(`http://${ipAddress}:3000/registro`, {
-    fetch(`/registro`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ username: username, password: password, email: email })
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Erro ao registrar usuário');
-        }
-        alert('Usuário registrado com sucesso');
-        // redireciona o usuário para a página de login após o registro bem-sucedido
-        window.location.href = '/';
-    })
-    .catch(error => {
-        alert('Erro ao registrar usuário: ' + error.message);
-        console.error('Erro ao registrar usuário:', error);
-    });
+    $.post('/registro', { username, password, email, permissao })
+        .done(function(response) {
+            // limpa os campos do formulário
+            $('#registro-username').val('');
+            $('#registro-password').val('');
+            $('#registro-email').val('');
+            
+            alert('Usuário registrado com sucesso');
+
+            // página inicial
+            window.location.href = '/login-page';
+        })
+        .fail(function(error) {
+            console.error('Erro ao adicionar usuário:', error);
+            if (error.statusText === "error") {
+                alert('Erro ao se comunicar com o servidor. Verifique sua conexão de internet e tente novamente.');
+            } else {
+                alert('Erro ao adicionar usuário. Por favor, tente novamente.');
+            }
+        });
 }
-
-// verifica se o usuário está autenticado e atualiza a navbar
-function atualizarNavbar() {
-    const usuario = sessionStorage.getItem('usuario');
-    console.log('usuário recuperado da sessão:', usuario);
-    if (usuario) {
-        document.getElementById('navbarUsername').textContent = usuario;
-        document.getElementById('navbarUsername').style.display = 'inline';
-        document.getElementById('logoutButton').style.display = 'inline';
-        document.getElementById('loginButton').style.display = 'none';
-        document.getElementById('irCarrinho').style.display = 'inline';
-        document.getElementById('irConsulta').style.display = 'inline';
-    } else {
-        document.getElementById('navbarUsername').style.display = 'none';
-        document.getElementById('logoutButton').style.display = 'none';
-        document.getElementById('loginButton').style.display = 'inline';
-        document.getElementById('irCarrinho').style.display = 'none';
-        document.getElementById('irConsulta').style.display = 'none';
-    }
-}
-
-// chamar a função para atualizar a navbar quando o HTML e o CSS forem completamente carregados
-document.addEventListener('DOMContentLoaded', function() {
-    atualizarNavbar();
-});
-
 
 // adiciona evento de clique ao botão de logout
-document.getElementById('logoutButton').addEventListener('click', function() {
+function logout() {
     // remove o usuário da sessão
     window.location.href = '/';
     sessionStorage.removeItem('usuario');
+    sessionStorage.removeItem('permissao');
     // atualiza a navbar
     atualizarNavbar();
     // redireciona para a página de login
     // window.location.href = '/';
-});
+};

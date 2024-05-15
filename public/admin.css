@@ -4,6 +4,10 @@ html, body {
     font-family: "Outfit", sans-serif;
 }
 
+h1{
+    font-size: 24px;
+}
+
 #navbarUsername{
     color: white;
     margin-right: 10px;

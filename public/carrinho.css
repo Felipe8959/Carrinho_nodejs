@@ -25,6 +25,10 @@ h1{
     color: rgb(53, 53, 53);
 }
 
+#navbarUsername{
+    margin-right: 10px;
+}
+
 .resumo-compras{
     text-align: center;
     margin-top: 20px;
