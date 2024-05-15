@@ -64,13 +64,12 @@ function registrar() {
 }
 
 // adiciona evento de clique ao botão de logout
-function logout() {
+document.getElementById('logoutButton').addEventListener('click', function() {
     // remove o usuário da sessão
     window.location.href = '/';
     sessionStorage.removeItem('usuario');
-    sessionStorage.removeItem('permissao');
     // atualiza a navbar
     atualizarNavbar();
     // redireciona para a página de login
     // window.location.href = '/';
-};
+});
