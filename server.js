@@ -111,7 +111,7 @@ function checkAdminPermission(req, res, next) {
 
 
 // client.query(
-//   'ALTER TABLE usuarios DROP CONSTRAINT unique_username;',
+//   'ALTER TABLE itens_tabela RENAME TO itens_carrinho;',
 // )
 
 
